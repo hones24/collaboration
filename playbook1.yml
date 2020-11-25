@@ -1,0 +1,8 @@
+---
+- name: install finger
+  hosts: all
+  tasks:
+   - name: install
+     yum:
+       name: finger
+       state: installed
