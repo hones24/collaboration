@@ -1,0 +1,23 @@
+---
+ - name: creating 
+   hosts: prod
+   tasks: 
+       - name: install httpd    
+         yum:
+           name: httpd
+           state: latest 
+    
+         notify:
+          - restart appache
+
+       - name: start httpd
+         service: 
+           name: httpd
+           state: start
+           enabled: yes
+
+   handlers:
+       - name: restart appache 
+         service:
+           name: httpd
+           state: stopped
