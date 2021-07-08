@@ -1,0 +1,18 @@
+---
+ - name: hi 
+   hosts: vm1
+   tasks:
+       name: "Return service state information"
+       service_facts:
+       - name: "Creating a report when starting the services successfully done"
+       lineinfile:
+         line: "HOSTNAME: {{ inventory_hostname }} | {{ item }} : OK "
+         dest: "{{ local_dir }}/update.{{ inventory_hostname }}.OK"
+         create: yes
+       delegate_to: localhost
+       when: ansible_facts.services[item]['state'] == "running" and start_failed is not failed
+       loop: ZZ"{{ ansible_facts.services.keys() }}"
+
+
+
+   
